@@ -43,6 +43,10 @@ func FillSep(docs []Doc) Doc {
 func Hsep(docs []Doc) Doc {
 	result := Empty()
 	for _, d := range docs {
+		if result == Empty() {
+			result = Beside(result, d)
+			continue
+		}
 		result = Beside(result, (Beside(Char(' '), d)))
 	}
 
