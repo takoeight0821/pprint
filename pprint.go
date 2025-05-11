@@ -3,7 +3,6 @@
 package pprint
 
 import (
-	"cmp"
 	"fmt"
 	"io"
 	"math"
@@ -627,14 +626,14 @@ type Pretty interface {
 	Pretty() Doc
 }
 
-func max[T cmp.Ordered](a, b T) T {
+func max(a, b int) int {
 	if a > b {
 		return a
 	}
 	return b
 }
 
-func min[T cmp.Ordered](a, b T) T {
+func min(a, b int) int {
 	if a < b {
 		return a
 	}
