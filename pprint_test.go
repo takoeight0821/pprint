@@ -57,25 +57,25 @@ func helloworld() test {
 func forStatement() test {
 	return test{
 		name: "For Statement",
-		doc: pprint.Vsep([]pprint.Doc{
-			pprint.Hsep([]pprint.Doc{
+		doc: pprint.Vsep(
+			pprint.Hsep(
 				pprint.Text("for"),
 				pprint.Text("i"),
 				pprint.Text(":="),
 				pprint.Text("range"),
 				pprint.Text("a"),
 				pprint.Text("{"),
-			}),
-			pprint.Indent(2, pprint.Hcat([]pprint.Doc{
+			),
+			pprint.Indent(2, pprint.Hcat(
 				pprint.Text("fmt"),
 				pprint.Text("."),
 				pprint.Text("Println"),
 				pprint.Text("("),
 				pprint.Text("i"),
 				pprint.Text(")"),
-			})),
+			)),
 			pprint.Text("}"),
-		}),
+		),
 		wantLines: []string{
 			"for i := range a {",
 			"  fmt.Println(i)",
