@@ -8,7 +8,7 @@ example:
 package main
 
 import (
-    "github.com/takoeight0821/pprint"
+  "github.com/takoeight0821/pprint"
 )
 
 func main() {
