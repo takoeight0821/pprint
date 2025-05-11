@@ -1,5 +1,6 @@
 # pprint
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/takoeight0821/pprint.svg)](https://pkg.go.dev/github.com/takoeight0821/pprint)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/takoeight0821/pprint)
 
 pprint is a port of Haskell's `wl-print` library to Go.
