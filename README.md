@@ -12,29 +12,28 @@ import (
 )
 
 func main() {
-    doc := pprint.Vsep(
-			pprint.Hsep(
-				pprint.Text("for"),
-				pprint.Text("i"),
-				pprint.Text(":="),
-				pprint.Text("range"),
-				pprint.Text("a"),
-				pprint.Text("{"),
-			),
-			pprint.Indent(2, pprint.Hcat(
-				pprint.Text("fmt"),
-				pprint.Text("."),
-				pprint.Text("Println"),
-				pprint.Text("("),
-				pprint.Text("i"),
-				pprint.Text(")"),
-			)),
-			pprint.Text("}"),
-		)
+  doc := pprint.Vsep(
+    pprint.Hsep(
+      pprint.Text("for"),
+      pprint.Text("i"),
+      pprint.Text(":="),
+      pprint.Text("range"),
+      pprint.Text("a"),
+      pprint.Text("{"),
+    ),
+    pprint.Indent(2, pprint.Hcat(
+      pprint.Text("fmt"),
+      pprint.Text("."),
+      pprint.Text("Println"),
+      pprint.Text("("),
+      pprint.Text("i"),
+      pprint.Text(")"),
+    )),
+    pprint.Text("}"),
+  )
 
-    pprint.PutDoc(doc)
+  pprint.PutDoc(doc)
 }
-
 ```
 
 output:
