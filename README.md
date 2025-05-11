@@ -1,5 +1,7 @@
 # pprint
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/takoeight0821/pprint)
+
 pprint is a port of Haskell's `wl-print` library to Go.
 It provides a text rendering engine with automatic layout and formatting.
 
@@ -42,5 +44,3 @@ for i := range a {
   fmt.Println(i)
 }
 ```
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/takoeight0821/pprint)
