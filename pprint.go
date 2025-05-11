@@ -33,6 +33,10 @@ func Sep(docs ...Doc) Doc {
 func FillSep(docs ...Doc) Doc {
 	result := Empty()
 	for _, d := range docs {
+		if result == Empty() {
+			result = Beside(result, d)
+			continue
+		}
 		result = Beside(result, Beside(SoftLine(), d))
 	}
 
@@ -98,6 +102,7 @@ func Vcat(docs ...Doc) Doc {
 	for _, d := range docs {
 		if result == Empty() {
 			result = Beside(result, d)
+			continue
 		}
 
 		result = Beside(result, (Beside(LineBreak(), d)))
