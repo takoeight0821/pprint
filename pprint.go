@@ -17,11 +17,13 @@ func Punctuate(p Doc, docs ...Doc) []Doc {
 		return nil
 	}
 
-	if len(docs) == 1 {
-		return []Doc{docs[0]}
+	result := make([]Doc, 0, len(docs))
+	for _, d := range docs {
+		result = append(result, Beside(d, p))
 	}
+	result[len(docs)-1] = docs[len(docs)-1]
 
-	return append([]Doc{Beside(docs[0], p)}, Punctuate(p, docs[1:]...)...)
+	return result
 }
 
 // Sep concatenates documents either horizonally, if it fits the page, or veritically, if it doesn't.
@@ -31,12 +33,12 @@ func Sep(docs ...Doc) Doc {
 
 // FillSep concatenates documents horizontally as long as its fits the page, than, insert a `Line` and continues doing that for all documents.
 func FillSep(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
-		if result == Empty() {
-			result = Beside(result, d)
-			continue
-		}
+	if len(docs) == 0 {
+		return Empty()
+	}
+
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, Beside(SoftLine(), d))
 	}
 
@@ -45,12 +47,12 @@ func FillSep(docs ...Doc) Doc {
 
 // Hsep concatenates documents horizontally.
 func Hsep(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
-		if result == Empty() {
-			result = Beside(result, d)
-			continue
-		}
+	if len(docs) == 0 {
+		return Empty()
+	}
+
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, (Beside(Char(' '), d)))
 	}
 
@@ -59,12 +61,12 @@ func Hsep(docs ...Doc) Doc {
 
 // Vsep concatenates documents vertically.
 func Vsep(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
-		if result == Empty() {
-			result = Beside(result, d)
-			continue
-		}
+	if len(docs) == 0 {
+		return Empty()
+	}
+
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, (Beside(Line(), d)))
 	}
 
@@ -78,8 +80,12 @@ func Cat(docs ...Doc) Doc {
 
 // FillCat concatenates documents like `FillSep`, but with `LineBreak` instead of `Line`.
 func FillCat(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
+	if len(docs) == 0 {
+		return Empty()
+	}
+
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, Beside(SoftBreak(), d))
 	}
 
@@ -88,8 +94,12 @@ func FillCat(docs ...Doc) Doc {
 
 // Hcat concatenates documents without any space between them.
 func Hcat(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
+	if len(docs) == 0 {
+		return Empty()
+	}
+
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, d)
 	}
 
@@ -98,13 +108,12 @@ func Hcat(docs ...Doc) Doc {
 
 // Vcat concatenates documents vertically like `Vsep`, but with `LineBreak` instead of `Line`.
 func Vcat(docs ...Doc) Doc {
-	result := Empty()
-	for _, d := range docs {
-		if result == Empty() {
-			result = Beside(result, d)
-			continue
-		}
+	if len(docs) == 0 {
+		return Empty()
+	}
 
+	result := docs[0]
+	for _, d := range docs[1:] {
 		result = Beside(result, (Beside(LineBreak(), d)))
 	}
 
