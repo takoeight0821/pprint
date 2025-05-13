@@ -31,46 +31,40 @@ func Sep(docs ...Doc) Doc {
 	return Group(Vsep(docs...))
 }
 
-// FillSep concatenates documents horizontally as long as its fits the page, than, insert a `Line` and continues doing that for all documents.
-func FillSep(docs ...Doc) Doc {
+// mergeDocs merges a list of documents using the provided merge function.
+// The merge function's first argument is the accumulated document, and the second argument is the next document to merge.
+func mergeDocs(docs []Doc, merge func(Doc, Doc) Doc) Doc {
 	if len(docs) == 0 {
 		return Empty()
 	}
 
 	result := docs[0]
 	for _, d := range docs[1:] {
-		result = Beside(result, Beside(SoftLine(), d))
+		result = merge(result, d)
 	}
 
 	return result
+}
+
+// FillSep concatenates documents horizontally as long as its fits the page, than, insert a `Line` and continues doing that for all documents.
+func FillSep(docs ...Doc) Doc {
+	return mergeDocs(docs, func(a, b Doc) Doc {
+		return Beside(a, Beside(SoftLine(), b))
+	})
 }
 
 // Hsep concatenates documents horizontally.
 func Hsep(docs ...Doc) Doc {
-	if len(docs) == 0 {
-		return Empty()
-	}
-
-	result := docs[0]
-	for _, d := range docs[1:] {
-		result = Beside(result, (Beside(Char(' '), d)))
-	}
-
-	return result
+	return mergeDocs(docs, func(a, b Doc) Doc {
+		return Beside(a, Beside(Char(' '), b))
+	})
 }
 
 // Vsep concatenates documents vertically.
 func Vsep(docs ...Doc) Doc {
-	if len(docs) == 0 {
-		return Empty()
-	}
-
-	result := docs[0]
-	for _, d := range docs[1:] {
-		result = Beside(result, (Beside(Line(), d)))
-	}
-
-	return result
+	return mergeDocs(docs, func(a, b Doc) Doc {
+		return Beside(a, Beside(Line(), b))
+	})
 }
 
 // Cat concatenates documents like `Sep`, but with `LineBreak` instead of `Line`.
@@ -80,44 +74,21 @@ func Cat(docs ...Doc) Doc {
 
 // FillCat concatenates documents like `FillSep`, but with `LineBreak` instead of `Line`.
 func FillCat(docs ...Doc) Doc {
-	if len(docs) == 0 {
-		return Empty()
-	}
-
-	result := docs[0]
-	for _, d := range docs[1:] {
-		result = Beside(result, Beside(SoftBreak(), d))
-	}
-
-	return result
+	return mergeDocs(docs, func(a, b Doc) Doc {
+		return Beside(a, Beside(SoftBreak(), b))
+	})
 }
 
 // Hcat concatenates documents without any space between them.
 func Hcat(docs ...Doc) Doc {
-	if len(docs) == 0 {
-		return Empty()
-	}
-
-	result := docs[0]
-	for _, d := range docs[1:] {
-		result = Beside(result, d)
-	}
-
-	return result
+	return mergeDocs(docs, Beside)
 }
 
 // Vcat concatenates documents vertically like `Vsep`, but with `LineBreak` instead of `Line`.
 func Vcat(docs ...Doc) Doc {
-	if len(docs) == 0 {
-		return Empty()
-	}
-
-	result := docs[0]
-	for _, d := range docs[1:] {
-		result = Beside(result, (Beside(LineBreak(), d)))
-	}
-
-	return result
+	return mergeDocs(docs, func(a, b Doc) Doc {
+		return Beside(a, Beside(LineBreak(), b))
+	})
 }
 
 // SoftLine is a line break that is rendered as a space if the group fits on the page, or as a line break otherwise.
