@@ -15,7 +15,7 @@ func TestSExpr_Output(t *testing.T) {
 	pprint.FputDoc(&buf, doc)
 	got := buf.String()
 	want := "(+ 1 (+ 2 3))"
-	if !cmp.Equal(got, want) {
-		t.Errorf("SExpr() mismatch (-got +want):\n%s", cmp.Diff(got, want))
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf("SExpr() mismatch (-got +want):\n%s", diff)
 	}
 }

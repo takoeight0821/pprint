@@ -15,7 +15,8 @@ func TestPrettyStruct_Output(t *testing.T) {
 	pprint.FputDoc(&buf, doc)
 	got := buf.String()
 	want := "Name: Alice\nAge: 30"
-	if !cmp.Equal(got, want) {
-		t.Errorf("PrettyStruct() mismatch (-got +want):\n%s", cmp.Diff(got, want))
+
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf("PrettyStruct() mismatch (-got +want):\n%s", diff)
 	}
 }

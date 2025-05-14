@@ -25,7 +25,7 @@ func TestJSONToMarkdown_Output(t *testing.T) {
 		"| port  | 8080      |",
 	}
 	want := strings.Join(wants, "\n")
-	if !cmp.Equal(got, want) {
-		t.Errorf("JSONToMarkdown() mismatch (-got +want):\n%s", cmp.Diff(got, want))
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf("JSONToMarkdown() mismatch (-got +want):\n%s", diff)
 	}
 }
