@@ -7,6 +7,7 @@ import (
 	"io"
 	"math"
 	"os"
+	"strings"
 )
 
 // Combinators
@@ -17,9 +18,9 @@ func Punctuate(p Doc, docs ...Doc) []Doc {
 		return nil
 	}
 
-	result := make([]Doc, 0, len(docs))
-	for _, d := range docs {
-		result = append(result, Beside(d, p))
+	result := make([]Doc, len(docs))
+	for i, d := range docs {
+		result[i] = Beside(d, p)
 	}
 	result[len(docs)-1] = docs[len(docs)-1]
 
@@ -179,7 +180,7 @@ func Align(doc Doc) Doc {
 
 // Spaces returns a string consisting of n space characters.
 func Spaces(n int) string {
-	return fmt.Sprintf("%*s", n, "")
+	return strings.Repeat(" ", n)
 }
 
 // Primitives
