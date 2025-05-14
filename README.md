@@ -45,3 +45,18 @@ for i := range a {
   fmt.Println(i)
 }
 ```
+
+## Examples
+
+See the [examples](./examples/) directory for advanced usage:
+
+- **reflection_pretty.go**: Automatically implement Pretty() for a struct using reflection
+- **json_to_markdown.go**: Read a JSON config and pretty-print as Markdown
+- **ast_sexpr.go**: Print S-expression of a simple AST
+
+To run example tests:
+
+```sh
+cd examples
+go test
+```
