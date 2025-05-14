@@ -9,7 +9,7 @@ import (
 )
 
 func TestSExpr_Output(t *testing.T) {
-	expr := Add{Number{1}, Add{Number{2}, Number{3}}}
+	expr := NewAdd(NewNumber(1), NewAdd(NewNumber(2), NewNumber(3)))
 	doc := SExpr(expr)
 	var buf strings.Builder
 	pprint.FputDoc(&buf, doc)
