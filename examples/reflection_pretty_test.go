@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/takoeight0821/pprint"
 )
 
@@ -14,7 +15,7 @@ func TestPrettyStruct_Output(t *testing.T) {
 	pprint.FputDoc(&buf, doc)
 	got := buf.String()
 	want := "Name: Alice\nAge: 30"
-	if got != want {
-		t.Errorf("PrettyStruct() = %q, want %q", got, want)
+	if !cmp.Equal(got, want) {
+		t.Errorf("PrettyStruct() mismatch (-got +want):\n%s", cmp.Diff(got, want))
 	}
 }
