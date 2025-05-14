@@ -30,7 +30,7 @@ func JSONToMarkdown[T any](value T) (pprint.Doc, error) {
 
 	// Get all keys
 	keys := make([]string, 0, len(data))
-	maxKeyLen := 0
+	maxKeyLen := 0 // Used for padding
 	for k := range data {
 		keys = append(keys, k)
 		if len(k) > maxKeyLen {
@@ -42,7 +42,7 @@ func JSONToMarkdown[T any](value T) (pprint.Doc, error) {
 
 	// Get all values
 	values := make([]pprint.Doc, len(data))
-	maxValueLen := 0
+	maxValueLen := 0 // Used for padding
 	for i, k := range keys {
 		v := data[k]
 		str := fmt.Sprintf("%v", v)
@@ -52,6 +52,7 @@ func JSONToMarkdown[T any](value T) (pprint.Doc, error) {
 		}
 	}
 
+	// Create the header
 	lines := make([]pprint.Doc, len(data)+2)
 	lines[0] = pprint.Hsep(
 		pprint.Text("|"),
@@ -68,6 +69,7 @@ func JSONToMarkdown[T any](value T) (pprint.Doc, error) {
 		pprint.Text("|"),
 	)
 
+	// Create the body
 	for i, k := range keys {
 		lines[i+2] = pprint.Hsep(
 			pprint.Text("|"),
