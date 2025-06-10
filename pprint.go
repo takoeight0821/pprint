@@ -27,7 +27,7 @@ func Punctuate(p Doc, docs ...Doc) []Doc {
 	return result
 }
 
-// Sep concatenates documents either horizonally, if it fits the page, or veritically, if it doesn't.
+// Sep concatenates documents either horizontally, if it fits the page, or vertically, if it doesn't.
 func Sep(docs ...Doc) Doc {
 	return Group(Vsep(docs...))
 }
@@ -430,7 +430,7 @@ func Nil() *Docs {
 
 // RenderPretty renders the document with pretty printing.
 // `RenderPretty(rfrac, w, x)` will render the document `x` with a page width of `w` and a ribbon width of `rfrac * w`.
-// The ribbon width is the maximal amout of non-identation characters on a line.
+// The ribbon width is the maximal amount of non-indentation characters on a line.
 // `rfrac` should be between 0 and 1.
 func RenderPretty(rfrac float64, w int, x Doc) SimpleDoc {
 	r := max(w, int(math.Round(float64(w)*rfrac)))
