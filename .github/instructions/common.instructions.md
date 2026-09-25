@@ -4,7 +4,7 @@ applyTo: '**'
 
 ## Comments
 
-Add comments **ONLY IF** the code is not self-explanatory.
+Add comments only where the code is not self-explanatory.
 
 ## Test
 
