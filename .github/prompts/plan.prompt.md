@@ -1,5 +1,5 @@
 ---
-mode: 'agent'
+agent: 'agent'
 ---
 
 # 🧭 Prompt: Document Research & Change Plan in `plan.md`

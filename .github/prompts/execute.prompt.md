@@ -1,5 +1,5 @@
 ---
-mode: 'agent'
+agent: 'agent'
 ---
 
 # 🧭 Prompt: Execute Change Plan from `plan.md`
