@@ -1,6 +1,5 @@
 ---
-mode: 'agent'
-tools: ['fetch']
+agent: 'agent'
 ---
 
 # 🧭 Prompt: Execute Change Plan from `plan.md`
